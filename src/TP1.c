@@ -54,7 +54,7 @@
 #define LED_TOGGLE_500MS	(500)
 #define LED_TOGGLE_1000MS	(1000)
 
-#define TEST (TP1_6)
+#define TEST (TP1_5)
 #define TICKRATE_MS (TICKRATE_10MS)
 #define LED_TOGGLE_MS (LED_TOGGLE_500MS/TICKRATE_MS)
 /*==================[internal data declaration]==============================*/
@@ -64,7 +64,7 @@
 /*==================[internal data definition]===============================*/
 
 /*==================[external data definition]===============================*/
-#if (TEST == TP1_4)
+#if (TEST == TP1_4 | TEST == TP1_5)
 volatile bool LED_Time_Flag = false;
 #endif
 /*==================[internal functions definition]==========================*/
@@ -85,7 +85,7 @@ void myTickHook( void *ptr ){
 }
 #endif
 
-#if (TEST == TP1_4)
+#if (TEST == TP1_4 | TEST == TP1_5)
 void myTickHook( void *ptr ) {
 	LED_Time_Flag = true;
 }
@@ -304,7 +304,7 @@ int main(void){
 	   	/* UART for debug messages. */
 	   	debugPrintConfigUart( UART_USB, 115200 );
 	   	debugPrintString( "DEBUG c/sAPI\r\n" );
-	   	debugPrintString( "LED Toggle\n" );
+	   	debugPrintString( "LED Toggle\r\n" );
 
 	   	/* ------------- REPETIR POR SIEMPRE ------------- */
 	   	while(1) {
@@ -317,32 +317,32 @@ int main(void){
 	   				if (LED_Toggle_Number == 0 || LED_Toggle_Number == 1){
 	   					LED_Toggle_Counter = LED_TOGGLE_MS;
 	   					gpioToggle(LED3);
-	   					debugPrintString( "LED Toggle\n Led 3" );
+	   					debugPrintString( "LED Toggle\r\n Led 3\r\n" );
 	   				}
 	   				if (LED_Toggle_Number == 2 || LED_Toggle_Number == 3){
 	   					LED_Toggle_Counter = LED_TOGGLE_MS;
 	   					gpioToggle(LED2);
-	   					debugPrintString( "LED Toggle\n Led 2" );
+	   					debugPrintString( "LED Toggle\r\n Led 2\r\n" );
 	   				}
 	   				if (LED_Toggle_Number == 4 || LED_Toggle_Number == 5){
 	   					LED_Toggle_Counter = LED_TOGGLE_MS;
 	   					gpioToggle(LED1);
-	   					debugPrintString( "LED Toggle\n Led 1" );
+	   					debugPrintString( "LED Toggle\r\n Led 1\r\n" );
 	   				}
 	   				if (LED_Toggle_Number == 6 || LED_Toggle_Number == 7){
 	   					LED_Toggle_Counter = LED_TOGGLE_MS;
 	   					gpioToggle(LEDR);
-	   					debugPrintString( "LED Toggle\n Led R" );
+	   					debugPrintString( "LED Toggle\r\n Led R\r\n" );
 	   				}
 	   				if (LED_Toggle_Number == 8 || LED_Toggle_Number == 9){
 	   					LED_Toggle_Counter = LED_TOGGLE_MS;
 	   					gpioToggle(LEDG);
-	   					debugPrintString( "LED Toggle\n Led G" );
+	   					debugPrintString( "LED Toggle\r\n Led G\r\n" );
 	   				}
 	   				if (LED_Toggle_Number == 10 || LED_Toggle_Number == 11){
 	   					LED_Toggle_Counter = LED_TOGGLE_MS;
 	   					gpioToggle(LEDB);
-	   					debugPrintString( "LED Toggle\n Led B" );
+	   					debugPrintString( "LED Toggle\r\n Led B\r\n" );
 	   				}
 	   				LED_Toggle_Number++;
 	   				if (LED_Toggle_Number==12){
